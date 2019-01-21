@@ -18,3 +18,6 @@ For compiling and running just type:
 make run
 ```
 
+## Class Diagram
+
+![](out/classDiagram/classDiagram.png)
