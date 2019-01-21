@@ -18,4 +18,3 @@ For compiling and running just type:
 make run
 ```
 
-
