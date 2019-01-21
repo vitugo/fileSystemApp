@@ -2,9 +2,9 @@
 public abstract class Entry 
 { 
     protected Directory parent; 
-    protected long created; 
-    protected long lastUpdated; 
-    protected long lastAccessed; 
+    protected long dateCreated; 
+    protected long dateLastUpdate; 
+    protected long dateLastAccess; 
     protected String name; 
     protected boolean readable;
     protected boolean writable;
@@ -13,9 +13,9 @@ public abstract class Entry
     { 
         name = n; 
         parent = p; 
-        created= System.currentTimeMillis(); 
-        lastUpdated = System.currentTimeMillis(); 
-        lastAccessed = System.currentTimeMillis(); 
+        dateCreated= System.currentTimeMillis(); 
+        dateLastUpdate = System.currentTimeMillis(); 
+        dateLastAccess = System.currentTimeMillis(); 
         readable = true;
         writable = true;
     } 
@@ -32,15 +32,15 @@ public abstract class Entry
     /* Getters and setters. */
     public long getcreationTime() 
     { 
-        return created; 
+        return dateCreated; 
     } 
     public long getLastUpdatedTime() 
     { 
-        return lastUpdated; 
+        return dateLastUpdate; 
     } 
     public long getLastAccessedTime() 
     { 
-        return lastAccessed; 
+        return dateLastAccess; 
     } 
     public void changeName(String n) 
     { 
