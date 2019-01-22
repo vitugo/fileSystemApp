@@ -4,5 +4,5 @@ compile: FileSystemApp.java
 clean :
 	rm *.class
 
-run: fileSystemApp
+run: compile
 	java FileSystemApp
