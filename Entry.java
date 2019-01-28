@@ -1,10 +1,12 @@
+import java.util.Calendar;
+
 // Entry is superclass for both File and Directory 
 public abstract class Entry 
 { 
     protected Directory parent; 
-    protected long dateCreated; 
-    protected long dateLastUpdate; 
-    protected long dateLastAccess; 
+    protected static Calendar dateCreated; 
+    protected static Calendar dateLastUpdate; 
+    protected static Calendar dateLastAccess; 
     protected String name; 
     protected boolean readable;
     protected boolean writable;
@@ -13,13 +15,13 @@ public abstract class Entry
     { 
         name = n; 
         parent = p; 
-        dateCreated= System.currentTimeMillis(); 
-        dateLastUpdate = System.currentTimeMillis(); 
-        dateLastAccess = System.currentTimeMillis(); 
+        dateCreated= Calendar.getInstance(); 
+        dateLastUpdate = Calendar.getInstance(); 
+        dateLastAccess = Calendar.getInstance(); 
         readable = true;
         writable = true;
-    } 
-  
+    }
+    
     public boolean delete() 
     { 
         if (parent == null) 
@@ -30,15 +32,42 @@ public abstract class Entry
     public abstract int size(); 
   
     /* Getters and setters. */
-    public long getcreationTime() 
+    public Calendar getcreationTime() 
     { 
         return dateCreated; 
     } 
-    public long getLastUpdatedTime() 
+
+    public void updateLastDateUpdate(){
+        dateLastUpdate = Calendar.getInstance();
+    }
+
+    public void updateLastDateAccess(){
+        dateLastAccess = Calendar.getInstance();
+    }
+
+    private static String convertDateToStringReadable(Calendar date){
+        return date.get(Calendar.YEAR) + "-" + (date.get(Calendar.MONTH) + 1) + "-" + date.get(Calendar.DAY_OF_MONTH)
+                + "_" 
+                + date.get(Calendar.HOUR_OF_DAY) + ":" + date.get(Calendar.MINUTE) + ":" + date.get(Calendar.SECOND);
+    }
+
+    public String getCreationDateReadable(){
+        return convertDateToStringReadable(dateCreated);
+    }
+
+    public String getLastDateUpdateReadable(){
+        return convertDateToStringReadable(dateLastUpdate);
+    }
+
+    public String getLastDateAccessReadable(){
+        return convertDateToStringReadable(dateLastAccess);
+    }
+
+    public Calendar getLastUpdatedTime() 
     { 
         return dateLastUpdate; 
     } 
-    public long getLastAccessedTime() 
+    public Calendar getLastAccessedTime() 
     { 
         return dateLastAccess; 
     } 

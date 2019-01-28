@@ -98,7 +98,9 @@ public class FileSystemApp {
 
                 char w = entry.isWritable() ? 'w' : '-';
                 char r = entry.isReadable() ? 'r' : '-';
-                System.out.printf("%s %c%c %s\n", entry.getClass().getName().charAt(0),  r, w, entry.name);
+                String propertyDate = "C" +entry.getCreationDateReadable() + "\tA" + entry.getLastDateAccessReadable() + "\tU" + entry.getLastDateUpdateReadable();
+                System.out.printf("%s %c%c %s %s\n", entry.getClass().getName().charAt(0),  r, w, entry.name, propertyDate);
+
             }
         }
 
@@ -395,6 +397,7 @@ public class FileSystemApp {
             Scanner contentInput = new Scanner(System.in);
             String content = contentInput.nextLine();
             file.setContents(content);
+            file.updateLastDateUpdate();
         }
     }
 
@@ -407,6 +410,7 @@ public class FileSystemApp {
         } else {            
             System.out.printf("Content:\n");
             System.out.println(file.getContents());
+            file.updateLastDateAccess();
         }
     }
 
